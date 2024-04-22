@@ -70,14 +70,14 @@ class Sword(Weapon):
     def attack(self, fighter, monster):
         print(f'Боец {fighter.name} выбирает меч.')
         print(f'Боец {fighter.name} наносит удар мечом.\n')
-        monster.defeted()
+        monster.defeated()
 
 
 class Bow(Weapon):
     def attack(self, fighter, monster):
         print(f'Боец {fighter.name} выбирает лук.')
         print(f'Боец {fighter.name} наносит удар из лука.\n')
-        monster.defeted()
+        monster.defeated()
 
 
 fighter1 = Fighter('Нео')
