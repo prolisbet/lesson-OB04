@@ -56,7 +56,7 @@ class Monster():
     def threat(self):
         print(f'Монстр {self.name} угрожает!\n')
 
-    def defeted(self):
+    def defeated(self):
         print(f'Монстр {self.name} побежден!\n')
 
 
