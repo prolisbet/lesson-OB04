@@ -50,14 +50,28 @@ class Fighter():
 
 
 class Monster():
-    def __init__(self, name):
+    def __init__(self, name, health=30):
         self.name = name
+        self._health = health
 
     def threat(self):
         print(f'Монстр {self.name} угрожает!\n')
 
     def defeated(self):
         print(f'Монстр {self.name} побежден!\n')
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        if not isinstance(value, int):
+            raise ValueError('Очки здоровья должны быть числом')
+        self._health = value
+        print(f'Очки здоровья монстра {self.name}: {self._health}.\n')
+        if self._health <= 0:
+            self.defeated()
 
 
 class Weapon(ABC):
@@ -70,22 +84,29 @@ class Sword(Weapon):
     def attack(self, fighter, monster):
         print(f'Боец {fighter.name} выбирает меч.')
         print(f'Боец {fighter.name} наносит удар мечом.\n')
-        monster.defeated()
+        monster.health = monster.health - 20
 
 
 class Bow(Weapon):
     def attack(self, fighter, monster):
         print(f'Боец {fighter.name} выбирает лук.')
         print(f'Боец {fighter.name} наносит удар из лука.\n')
-        monster.defeated()
+        monster.health = monster.health - 10
 
 
 fighter1 = Fighter('Нео')
 monster1 = Monster('Агент Смит')
 monster2 = Monster('Саурон')
 
+health1 = monster1.health
+print(f'Очки здоровья монстра {monster1.name}: {health1}.\n')
 monster1.threat()
 fighter1.changeWeapon(Bow(), monster1)
+fighter1.changeWeapon(Bow(), monster1)
+fighter1.changeWeapon(Bow(), monster1)
 
+health2 = monster2.health
+print(f'Очки здоровья монстра {monster2.name}: {health2}.\n')
 monster2.threat()
+fighter1.changeWeapon(Sword(), monster2)
 fighter1.changeWeapon(Sword(), monster2)
